@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WCFSample" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IOrdersService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IOrdersService_PlaceOrder_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IOrdersService_AdjustInventory_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IOrdersService_AdjustBalance_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <oletx:OleTxAssertion xmlns:oletx="http://schemas.microsoft.com/ws/2006/02/tx/oletx" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd2" namespace="WCFSampleLib.Person" />
+      <xsd:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd3" namespace="WCFSampleLib.Customer" />
+      <xsd:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd4" namespace="WCFSampleLib.Product" />
+      <xsd:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd5" namespace="WCFSampleLib.Order" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWCFSampleJson_GetDataJson_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataJson" />
+  </wsdl:message>
+  <wsdl:message name="IWCFSampleJson_GetDataJson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFSampleJson_GetDataUsingDataContractJson_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractJson" />
+  </wsdl:message>
+  <wsdl:message name="IWCFSampleJson_GetDataUsingDataContractJson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFSampleSoap_GetDataSoap_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSoap" />
+  </wsdl:message>
+  <wsdl:message name="IWCFSampleSoap_GetDataSoap_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSoapResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFSampleSoap_GetDataUsingDataContractSoap_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractSoap" />
+  </wsdl:message>
+  <wsdl:message name="IWCFSampleSoap_GetDataUsingDataContractSoap_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractSoapResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_GetCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomers" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_GetCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_GetProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProducts" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_GetProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_PlaceOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:PlaceOrder" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_PlaceOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PlaceOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_AdjustInventory_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdjustInventory" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_AdjustInventory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdjustInventoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_AdjustBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdjustBalance" />
+  </wsdl:message>
+  <wsdl:message name="IOrdersService_AdjustBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdjustBalanceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWCFSampleJson">
+    <wsdl:operation name="GetDataJson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFSampleJson/GetDataJson" message="tns:IWCFSampleJson_GetDataJson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFSampleJson/GetDataJsonResponse" message="tns:IWCFSampleJson_GetDataJson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContractJson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFSampleJson/GetDataUsingDataContractJson" message="tns:IWCFSampleJson_GetDataUsingDataContractJson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFSampleJson/GetDataUsingDataContractJsonResponse" message="tns:IWCFSampleJson_GetDataUsingDataContractJson_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IWCFSampleSoap">
+    <wsdl:operation name="GetDataSoap">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFSampleSoap/GetDataSoap" message="tns:IWCFSampleSoap_GetDataSoap_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFSampleSoap/GetDataSoapResponse" message="tns:IWCFSampleSoap_GetDataSoap_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContractSoap">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFSampleSoap/GetDataUsingDataContractSoap" message="tns:IWCFSampleSoap_GetDataUsingDataContractSoap_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFSampleSoap/GetDataUsingDataContractSoapResponse" message="tns:IWCFSampleSoap_GetDataUsingDataContractSoap_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType msc:usingSession="true" name="IOrdersService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrdersService/GetCustomers" message="tns:IOrdersService_GetCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrdersService/GetCustomersResponse" message="tns:IOrdersService_GetCustomers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrdersService/GetProducts" message="tns:IOrdersService_GetProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrdersService/GetProductsResponse" message="tns:IOrdersService_GetProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="PlaceOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrdersService/PlaceOrder" message="tns:IOrdersService_PlaceOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrdersService/PlaceOrderResponse" message="tns:IOrdersService_PlaceOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AdjustInventory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrdersService/AdjustInventory" message="tns:IOrdersService_AdjustInventory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrdersService/AdjustInventoryResponse" message="tns:IOrdersService_AdjustInventory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AdjustBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrdersService/AdjustBalance" message="tns:IOrdersService_AdjustBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrdersService/AdjustBalanceResponse" message="tns:IOrdersService_AdjustBalance_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IOrdersService" type="tns:IOrdersService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IOrdersService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetCustomers">
+      <soap12:operation soapAction="http://tempuri.org/IOrdersService/GetCustomers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProducts">
+      <soap12:operation soapAction="http://tempuri.org/IOrdersService/GetProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlaceOrder">
+      <wsp:PolicyReference URI="#NetTcpBinding_IOrdersService_PlaceOrder_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IOrdersService/PlaceOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdjustInventory">
+      <wsp:PolicyReference URI="#NetTcpBinding_IOrdersService_AdjustInventory_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IOrdersService/AdjustInventory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdjustBalance">
+      <wsp:PolicyReference URI="#NetTcpBinding_IOrdersService_AdjustBalance_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IOrdersService/AdjustBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WCFSample">
+    <wsdl:port name="NetTcpBinding_IOrdersService" binding="tns:NetTcpBinding_IOrdersService">
+      <soap12:address location="net.tcp://localhost:8734/WCFSample/tcp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8734/WCFSample/tcp</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>VIRPC\viruser</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

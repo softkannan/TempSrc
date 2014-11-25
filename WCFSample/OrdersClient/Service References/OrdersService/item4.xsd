@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd2" namespace="WCFSampleLib.Person" />
+  <xs:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd3" namespace="WCFSampleLib.Customer" />
+  <xs:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd4" namespace="WCFSampleLib.Product" />
+  <xs:import schemaLocation="http://localhost:8733/WCFSample/?xsd=xsd5" namespace="WCFSampleLib.Order" />
+  <xs:element name="GetDataJson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataJsonResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="WCFSampleLib.Person" minOccurs="0" name="GetDataJsonResult" nillable="true" type="q1:Person" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContractJson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="WCFSampleLib.Person" minOccurs="0" name="person" nillable="true" type="q2:Person" />
+        <xs:element xmlns:q3="WCFSampleLib.Person" minOccurs="0" name="person1" nillable="true" type="q3:Person" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContractJsonResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="WCFSampleLib.Person" minOccurs="0" name="GetDataUsingDataContractJsonResult" nillable="true" type="q4:Person" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataSoap">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataSoapResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="WCFSampleLib.Person" minOccurs="0" name="GetDataSoapResult" nillable="true" type="q5:Person" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContractSoap">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="WCFSampleLib.Person" minOccurs="0" name="person" nillable="true" type="q6:Person" />
+        <xs:element xmlns:q7="WCFSampleLib.Person" minOccurs="0" name="person1" nillable="true" type="q7:Person" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContractSoapResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="WCFSampleLib.Person" minOccurs="0" name="GetDataUsingDataContractSoapResult" nillable="true" type="q8:Person" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCustomersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="WCFSampleLib.Customer" minOccurs="0" name="GetCustomersResult" nillable="true" type="q9:ArrayOfCustomer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProducts">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetProductsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="WCFSampleLib.Product" minOccurs="0" name="GetProductsResult" nillable="true" type="q10:ArrayOfProduct" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlaceOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="WCFSampleLib.Order" minOccurs="0" name="order" nillable="true" type="q11:Order" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlaceOrderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PlaceOrderResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdjustInventory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="productID" type="xs:int" />
+        <xs:element minOccurs="0" name="quantity" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdjustInventoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AdjustInventoryResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdjustBalance">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="customerID" type="xs:int" />
+        <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdjustBalanceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AdjustBalanceResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
