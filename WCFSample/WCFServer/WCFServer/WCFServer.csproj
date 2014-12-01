@@ -72,14 +72,107 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdventureWorksDW.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWorksDW.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorksDW.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorksDW.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Course.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>TransactionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseLog.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>School.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimAccount.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimCurrency.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimCustomer.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimDate.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimDepartmentGroup.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimEmployee.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimGeography.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimOrganization.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimProduct.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimProductCategory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimProductSubcategory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimPromotion.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimReseller.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimSalesReason.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimSalesTerritory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimScenario.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactAdditionalInternationalProductDescription.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactCallCenter.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactCurrencyRate.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactFinance.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactInternetSale.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactProductInventory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactResellerSale.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactSalesQuota.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactSurveyResponse.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
     </Compile>
     <Compile Include="GetStudentGrades_Result.cs">
       <DependentUpon>School.tt</DependentUpon>
@@ -102,6 +195,9 @@
     <Compile Include="Product.cs">
       <DependentUpon>TransactionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProspectiveBuyer.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
     <Compile Include="School.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -117,11 +213,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>School.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
     <Compile Include="StudentGrade.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>TransactionDB.tt</DependentUpon>
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
     </Compile>
     <Compile Include="TransactionDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -138,6 +240,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TransactionDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="vAssocSeqLineItem.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vAssocSeqOrder.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vDMPrep.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vTargetMail.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vTimeSery.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WCFCallBack.cs" />
     <Compile Include="WCFSample.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +288,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="AdventureWorksDW.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdventureWorksDW.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AdventureWorksDW.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+      <LastGenOutput>AdventureWorksDW.Context.cs</LastGenOutput>
+    </None>
+    <None Include="AdventureWorksDW.edmx.diagram">
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+    </None>
+    <None Include="AdventureWorksDW.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+      <LastGenOutput>AdventureWorksDW.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

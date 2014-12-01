@@ -19,7 +19,7 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8733/WCFSample/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:8734/WCFSample/tcp/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="WCFSample.wsdl" MetadataType="Wsdl" ID="3028cb4b-47b7-41ac-ae95-152ae856c126" SourceId="1" SourceUrl="http://localhost:8733/WCFSample/?wsdl" />

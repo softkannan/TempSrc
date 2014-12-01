@@ -29,21 +29,36 @@ namespace WCFClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            {
+                WCFClientCallbackImpl impl = new WCFClientCallbackImpl(); 
 
-            var endAddress = new EndpointAddress("http://localhost:8733/WCFSample/");
+                var endAddress = new EndpointAddress("net.tcp://localhost:8734/WCFCallback/tcp/");
+                var binding = new NetTcpBinding();
 
+                var clientFactory = new DuplexChannelFactory<WCFSampleLib.IWCFCallBackService>(impl,binding, endAddress);
 
-            var binding = new WebHttpBinding();
+                var client = clientFactory.CreateChannel();
 
-            var clientFactory = new ChannelFactory<WCFSampleLib.IWCFSampleJson>(binding, endAddress);
+                var tempData = client.GetAllCources();
 
-            clientFactory.Endpoint.EndpointBehaviors.Add(new WebHttpBehavior());
+            }
 
-            var client = clientFactory.CreateChannel();
+            //{
+            //    var endAddress = new EndpointAddress("http://localhost:8733/WCFSample/");
 
-            var tempData = client.GetDataJson("Kannan");
+            //    var binding = new WebHttpBinding();
 
-            var tempData1 = client.GetDataUsingDataContractJson(new WCFSampleLib.Person(), new WCFSampleLib.Person());
+            //    var clientFactory = new ChannelFactory<WCFSampleLib.IWCFSampleJson>(binding, endAddress);
+
+            //    clientFactory.Endpoint.EndpointBehaviors.Add(new WebHttpBehavior());
+
+            //    var client = clientFactory.CreateChannel();
+
+            //    var tempData = client.GetDataJson("Kannan");
+
+            //    var tempData1 = client.GetDataUsingDataContractJson(new WCFSampleLib.Person(), new WCFSampleLib.Person());
+
+            //}
 
         }
     }

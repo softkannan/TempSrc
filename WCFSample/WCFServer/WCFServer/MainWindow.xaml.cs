@@ -21,13 +21,29 @@ namespace WCFServer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static ListBox LogList { get; private set; }
+        static MainWindow LogList {  get;  set; }
+
+        Action<string> logMsg;
+       
         public MainWindow()
         {
             InitializeComponent();
+
+            logMsg = (msg) => { this.logList.Items.Add(msg); };
+        }
+
+        public static void LogMsg(string msg)
+        {
+            LogList.LogMsgInnner(msg);
         }
 
         ServiceHost srvHost;
+        ServiceHost srvCallbackHost;
+
+        private async void LogMsgInnner(string msg)
+        {
+            await this.Dispatcher.BeginInvoke(logMsg, msg);
+        }
 
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -37,9 +53,19 @@ namespace WCFServer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            LogList = logList;
+            LogList = this;
 
             srvHost = new ServiceHost(typeof(WCFSample));
+            srvCallbackHost = new ServiceHost(typeof(WCFCallBackServiceImpl));
+
+            try
+            {
+                srvCallbackHost.Open();
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             try
             {

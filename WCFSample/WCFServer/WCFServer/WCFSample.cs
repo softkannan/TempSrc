@@ -18,14 +18,27 @@ namespace WCFServer
         AutomaticSessionShutdown = true,
         ConcurrencyMode = ConcurrencyMode.Multiple,
         TransactionIsolationLevel = System.Transactions.IsolationLevel.Serializable,
-        TransactionTimeout = "00:00:30", InstanceContextMode = InstanceContextMode.PerSession,
+        TransactionTimeout = "00:00:30", 
+        InstanceContextMode = InstanceContextMode.PerSession,
         ReleaseServiceInstanceOnTransactionComplete = false
         )]
     public class WCFSample : IWCFSampleJson, IWCFSampleSoap, IOrdersService
     {
+        public WCFSample()
+        {
+            LogSQL("Session Created.");
+
+            OperationContext.Current.InstanceContext.Closing += InstanceContext_Closing;
+            
+        }
+
+        void InstanceContext_Closing(object sender, EventArgs e)
+        {
+            LogSQL("Session Completd.");
+        }
         private void LogSQL(string sqlData)
         {
-            MainWindow.LogList.Items.Add(sqlData);
+            MainWindow.LogMsg(sqlData);
         }
 
         public WCFSampleLib.Person GetDataJson(string name)
