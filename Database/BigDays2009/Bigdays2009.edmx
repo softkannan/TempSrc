@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BigDays2009Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MembershipID" Type="uniqueidentifier" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MachineType">
+          <Key>
+            <PropertyRef Name="MachineTypeID" />
+          </Key>
+          <Property Name="MachineTypeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachineTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentalService">
+          <Key>
+            <PropertyRef Name="RentalServiceID" />
+          </Key>
+          <Property Name="RentalServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="EndDate" Type="smalldatetime" Nullable="false" />
+          <Property Name="ResourceID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="RentalServiceStateID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentalServiceState">
+          <Key>
+            <PropertyRef Name="RentalServiceStateID" />
+          </Key>
+          <Property Name="RentalServiceStateID" Type="int" Nullable="false" />
+          <Property Name="RentalServiceStateName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationID" Type="smallint" Nullable="false" />
+          <Property Name="RessourceName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SSNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="MachineTypeID" Type="smallint" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="SerialNo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_RentalService_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="RentalService" Type="Self.RentalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="RentalService">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentalService_RentalServiceState">
+          <End Role="RentalServiceState" Type="Self.RentalServiceState" Multiplicity="1" />
+          <End Role="RentalService" Type="Self.RentalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RentalServiceState">
+              <PropertyRef Name="RentalServiceStateID" />
+            </Principal>
+            <Dependent Role="RentalService">
+              <PropertyRef Name="RentalServiceStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentalService_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="RentalService" Type="Self.RentalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ResourceID" />
+            </Principal>
+            <Dependent Role="RentalService">
+              <PropertyRef Name="ResourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_MachineType">
+          <End Role="MachineType" Type="Self.MachineType" Multiplicity="0..1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineType">
+              <PropertyRef Name="MachineTypeID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="MachineTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CreateCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateMachine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="RessourceName" Type="nvarchar" Mode="In" />
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="SerialNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateMachineType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MachineTypeName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateRentalService" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="EndDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="ResourceID" Type="int" Mode="In" />
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CreateResource" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="RessourceName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SSNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="SerialNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CreateWorker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="RessourceName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SSNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+          <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteMachineType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="MachineTypeName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteRentalService" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RentalServiceID" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="EndDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="ResourceID" Type="int" Mode="In" />
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteResource" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ResourceID" Type="int" Mode="In" />
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="ResourceName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SSNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="SerialNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ReadAvailableMachines" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="EndDate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="ReadCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+          <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ReadLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ReadMachineType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="MachineTypeName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ReadRentalService" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RentalServiceID" Type="int" Mode="In" />
+          <Parameter Name="StartDateFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="StartDateTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="EndDateFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="EndDateTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="ResourceID" Type="int" Mode="In" />
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ReadResource" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ResourceID" Type="int" Mode="In" />
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="RessourceName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SSNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="SerialNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+          <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateMachineType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="MachineTypeName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateRentalService" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RentalServiceID" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="EndDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="ResourceID" Type="int" Mode="In" />
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateResource" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ResourceID" Type="int" Mode="In" />
+          <Parameter Name="LocationID" Type="smallint" Mode="In" />
+          <Parameter Name="RessourceName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SSNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="MachineTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="SerialNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="BigDays2009ModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachineType" EntityType="Self.MachineType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentalService" EntityType="Self.RentalService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentalServiceState" EntityType="Self.RentalServiceState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_RentalService_Customer" Association="Self.FK_RentalService_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="RentalService" EntitySet="RentalService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentalService_RentalServiceState" Association="Self.FK_RentalService_RentalServiceState">
+            <End Role="RentalServiceState" EntitySet="RentalServiceState" />
+            <End Role="RentalService" EntitySet="RentalService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentalService_Resource" Association="Self.FK_RentalService_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="RentalService" EntitySet="RentalService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_Location" Association="Self.FK_Resource_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_MachineType" Association="Self.FK_Resource_MachineType">
+            <End Role="MachineType" EntitySet="MachineType" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BigDays2009Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MembershipID" Type="Guid" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RentalServices" Relationship="Self.FK_RentalService_Customer" FromRole="Customer" ToRole="RentalService" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Resources" Relationship="Self.FK_Resource_Location" FromRole="Location" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="MachineType">
+          <Key>
+            <PropertyRef Name="MachineTypeID" />
+          </Key>
+          <Property Name="MachineTypeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachineTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Resources" Relationship="Self.FK_Resource_MachineType" FromRole="MachineType" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="RentalService">
+          <Key>
+            <PropertyRef Name="RentalServiceID" />
+          </Key>
+          <Property Name="RentalServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ResourceID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="RentalServiceStateID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_RentalService_Customer" FromRole="RentalService" ToRole="Customer" />
+          <NavigationProperty Name="RentalServiceState" Relationship="Self.FK_RentalService_RentalServiceState" FromRole="RentalService" ToRole="RentalServiceState" />
+          <NavigationProperty Name="Resource" Relationship="Self.FK_RentalService_Resource" FromRole="RentalService" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="RentalServiceState">
+          <Key>
+            <PropertyRef Name="RentalServiceStateID" />
+          </Key>
+          <Property Name="RentalServiceStateID" Type="Int32" Nullable="false" />
+          <Property Name="RentalServiceStateName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RentalServices" Relationship="Self.FK_RentalService_RentalServiceState" FromRole="RentalServiceState" ToRole="RentalService" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationID" Type="Int16" Nullable="false" />
+          <Property Name="RessourceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SSNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MachineTypeID" Type="Int16" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Resource_Location" FromRole="Resource" ToRole="Location" />
+          <NavigationProperty Name="MachineType" Relationship="Self.FK_Resource_MachineType" FromRole="Resource" ToRole="MachineType" />
+          <NavigationProperty Name="RentalServices" Relationship="Self.FK_RentalService_Resource" FromRole="Resource" ToRole="RentalService" />
+        </EntityType>
+        <Association Name="FK_RentalService_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="RentalService" Type="Self.RentalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="RentalService">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_MachineType">
+          <End Role="MachineType" Type="Self.MachineType" Multiplicity="0..1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineType">
+              <PropertyRef Name="MachineTypeID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="MachineTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentalService_RentalServiceState">
+          <End Role="RentalServiceState" Type="Self.RentalServiceState" Multiplicity="1" />
+          <End Role="RentalService" Type="Self.RentalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RentalServiceState">
+              <PropertyRef Name="RentalServiceStateID" />
+            </Principal>
+            <Dependent Role="RentalService">
+              <PropertyRef Name="RentalServiceStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentalService_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="RentalService" Type="Self.RentalService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ResourceID" />
+            </Principal>
+            <Dependent Role="RentalService">
+              <PropertyRef Name="ResourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BigDays2009Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="MachineTypes" EntityType="Self.MachineType" />
+          <EntitySet Name="RentalServices" EntityType="Self.RentalService" />
+          <EntitySet Name="RentalServiceStates" EntityType="Self.RentalServiceState" />
+          <EntitySet Name="Resources" EntityType="Self.Resource" />
+          <AssociationSet Name="FK_RentalService_Customer" Association="Self.FK_RentalService_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="RentalService" EntitySet="RentalServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_Location" Association="Self.FK_Resource_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Resource" EntitySet="Resources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_MachineType" Association="Self.FK_Resource_MachineType">
+            <End Role="MachineType" EntitySet="MachineTypes" />
+            <End Role="Resource" EntitySet="Resources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentalService_RentalServiceState" Association="Self.FK_RentalService_RentalServiceState">
+            <End Role="RentalServiceState" EntitySet="RentalServiceStates" />
+            <End Role="RentalService" EntitySet="RentalServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentalService_Resource" Association="Self.FK_RentalService_Resource">
+            <End Role="Resource" EntitySet="Resources" />
+            <End Role="RentalService" EntitySet="RentalServices" />
+          </AssociationSet>
+          <FunctionImport Name="CreateCustomer">
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateLocation">
+            <Parameter Name="LocationName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateMachine">
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="RessourceName" Mode="In" Type="String" />
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="SerialNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateMachineType">
+            <Parameter Name="MachineTypeName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateRentalService">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ResourceID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CreateResource">
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="RessourceName" Mode="In" Type="String" />
+            <Parameter Name="SSNo" Mode="In" Type="String" />
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="SerialNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateWorker">
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="RessourceName" Mode="In" Type="String" />
+            <Parameter Name="SSNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCustomer">
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLocation">
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="LocationName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMachineType">
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="MachineTypeName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteRentalService">
+            <Parameter Name="RentalServiceID" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ResourceID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteResource">
+            <Parameter Name="ResourceID" Mode="In" Type="Int32" />
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="ResourceName" Mode="In" Type="String" />
+            <Parameter Name="SSNo" Mode="In" Type="String" />
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="SerialNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReadAvailableMachines" ReturnType="Collection(BigDays2009Model.ReadAvailableMachines_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ReadCustomer" ReturnType="Collection(BigDays2009Model.ReadCustomer_Result)">
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReadLocation" ReturnType="Collection(BigDays2009Model.ReadLocation_Result)">
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="LocationName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReadMachineType" ReturnType="Collection(BigDays2009Model.ReadMachineType_Result)">
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="MachineTypeName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReadRentalService" ReturnType="Collection(BigDays2009Model.ReadRentalService_Result)">
+            <Parameter Name="RentalServiceID" Mode="In" Type="Int32" />
+            <Parameter Name="StartDateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="StartDateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="ResourceID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReadResource" ReturnType="Collection(BigDays2009Model.ReadResource_Result)">
+            <Parameter Name="ResourceID" Mode="In" Type="Int32" />
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="RessourceName" Mode="In" Type="String" />
+            <Parameter Name="SSNo" Mode="In" Type="String" />
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="SerialNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCustomer">
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateLocation">
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="LocationName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMachineType">
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="MachineTypeName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateRentalService">
+            <Parameter Name="RentalServiceID" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ResourceID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateResource">
+            <Parameter Name="ResourceID" Mode="In" Type="Int32" />
+            <Parameter Name="LocationID" Mode="In" Type="Int16" />
+            <Parameter Name="RessourceName" Mode="In" Type="String" />
+            <Parameter Name="SSNo" Mode="In" Type="String" />
+            <Parameter Name="MachineTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="SerialNo" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ReadAvailableMachines_Result">
+          <Property Type="Int32" Name="ResourceID" Nullable="false" />
+          <Property Type="Int16" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="LocationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="RessourceName" Nullable="false" MaxLength="100" />
+          <Property Type="Int16" Name="MachineTypeID" Nullable="true" />
+          <Property Type="String" Name="MachineTypeName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ReadCustomer_Result">
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="String" Name="LocationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ReadLocation_Result">
+          <Property Type="Int16" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="LocationName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ReadMachineType_Result">
+          <Property Type="Int16" Name="MachineTypeID" Nullable="false" />
+          <Property Type="String" Name="MachineTypeName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ReadRentalService_Result">
+          <Property Type="Int32" Name="RentalServiceID" Nullable="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="16" />
+          <Property Type="Int32" Name="ResourceID" Nullable="false" />
+          <Property Type="String" Name="RessourceName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ReadResource_Result">
+          <Property Type="Int32" Name="ResourceID" Nullable="false" />
+          <Property Type="Int16" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="RessourceName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SSNo" Nullable="true" MaxLength="50" />
+          <Property Type="Int16" Name="MachineTypeID" Nullable="true" />
+          <Property Type="String" Name="MachineTypeName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SerialNo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BigDays2009ModelStoreContainer" CdmEntityContainer="BigDays2009Entities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BigDays2009Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="MembershipID" ColumnName="MembershipID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="BigDays2009Model.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachineTypes">
+            <EntityTypeMapping TypeName="BigDays2009Model.MachineType">
+              <MappingFragment StoreEntitySet="MachineType">
+                <ScalarProperty Name="MachineTypeID" ColumnName="MachineTypeID" />
+                <ScalarProperty Name="MachineTypeName" ColumnName="MachineTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentalServices">
+            <EntityTypeMapping TypeName="BigDays2009Model.RentalService">
+              <MappingFragment StoreEntitySet="RentalService">
+                <ScalarProperty Name="RentalServiceID" ColumnName="RentalServiceID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="RentalServiceStateID" ColumnName="RentalServiceStateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentalServiceStates">
+            <EntityTypeMapping TypeName="BigDays2009Model.RentalServiceState">
+              <MappingFragment StoreEntitySet="RentalServiceState">
+                <ScalarProperty Name="RentalServiceStateID" ColumnName="RentalServiceStateID" />
+                <ScalarProperty Name="RentalServiceStateName" ColumnName="RentalServiceStateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="BigDays2009Model.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="RessourceName" ColumnName="RessourceName" />
+                <ScalarProperty Name="SSNo" ColumnName="SSNo" />
+                <ScalarProperty Name="MachineTypeID" ColumnName="MachineTypeID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateCustomer" FunctionName="BigDays2009Model.Store.CreateCustomer" />
+          <FunctionImportMapping FunctionImportName="CreateLocation" FunctionName="BigDays2009Model.Store.CreateLocation" />
+          <FunctionImportMapping FunctionImportName="CreateMachine" FunctionName="BigDays2009Model.Store.CreateMachine" />
+          <FunctionImportMapping FunctionImportName="CreateMachineType" FunctionName="BigDays2009Model.Store.CreateMachineType" />
+          <FunctionImportMapping FunctionImportName="CreateRentalService" FunctionName="BigDays2009Model.Store.CreateRentalService" />
+          <FunctionImportMapping FunctionImportName="CreateResource" FunctionName="BigDays2009Model.Store.CreateResource" />
+          <FunctionImportMapping FunctionImportName="CreateWorker" FunctionName="BigDays2009Model.Store.CreateWorker" />
+          <FunctionImportMapping FunctionImportName="DeleteCustomer" FunctionName="BigDays2009Model.Store.DeleteCustomer" />
+          <FunctionImportMapping FunctionImportName="DeleteLocation" FunctionName="BigDays2009Model.Store.DeleteLocation" />
+          <FunctionImportMapping FunctionImportName="DeleteMachineType" FunctionName="BigDays2009Model.Store.DeleteMachineType" />
+          <FunctionImportMapping FunctionImportName="DeleteRentalService" FunctionName="BigDays2009Model.Store.DeleteRentalService" />
+          <FunctionImportMapping FunctionImportName="DeleteResource" FunctionName="BigDays2009Model.Store.DeleteResource" />
+          <FunctionImportMapping FunctionImportName="ReadAvailableMachines" FunctionName="BigDays2009Model.Store.ReadAvailableMachines">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BigDays2009Model.ReadAvailableMachines_Result">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="RessourceName" ColumnName="RessourceName" />
+                <ScalarProperty Name="MachineTypeID" ColumnName="MachineTypeID" />
+                <ScalarProperty Name="MachineTypeName" ColumnName="MachineTypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadCustomer" FunctionName="BigDays2009Model.Store.ReadCustomer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BigDays2009Model.ReadCustomer_Result">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadLocation" FunctionName="BigDays2009Model.Store.ReadLocation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BigDays2009Model.ReadLocation_Result">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadMachineType" FunctionName="BigDays2009Model.Store.ReadMachineType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BigDays2009Model.ReadMachineType_Result">
+                <ScalarProperty Name="MachineTypeID" ColumnName="MachineTypeID" />
+                <ScalarProperty Name="MachineTypeName" ColumnName="MachineTypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadRentalService" FunctionName="BigDays2009Model.Store.ReadRentalService">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BigDays2009Model.ReadRentalService_Result">
+                <ScalarProperty Name="RentalServiceID" ColumnName="RentalServiceID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="RessourceName" ColumnName="RessourceName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReadResource" FunctionName="BigDays2009Model.Store.ReadResource">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BigDays2009Model.ReadResource_Result">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="RessourceName" ColumnName="RessourceName" />
+                <ScalarProperty Name="SSNo" ColumnName="SSNo" />
+                <ScalarProperty Name="MachineTypeID" ColumnName="MachineTypeID" />
+                <ScalarProperty Name="MachineTypeName" ColumnName="MachineTypeName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCustomer" FunctionName="BigDays2009Model.Store.UpdateCustomer" />
+          <FunctionImportMapping FunctionImportName="UpdateLocation" FunctionName="BigDays2009Model.Store.UpdateLocation" />
+          <FunctionImportMapping FunctionImportName="UpdateMachineType" FunctionName="BigDays2009Model.Store.UpdateMachineType" />
+          <FunctionImportMapping FunctionImportName="UpdateRentalService" FunctionName="BigDays2009Model.Store.UpdateRentalService" />
+          <FunctionImportMapping FunctionImportName="UpdateResource" FunctionName="BigDays2009Model.Store.UpdateResource" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

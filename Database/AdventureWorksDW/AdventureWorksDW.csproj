@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{62C7B29F-B416-4B54-BE15-C4A2472B0868}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdventureWorksDW</RootNamespace>
+    <AssemblyName>AdventureWorksDW</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdventureWorksDW.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWorksDW.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorksDW.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorksDW.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="DatabaseLog.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimAccount.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimCurrency.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimCustomer.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimDate.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimDepartmentGroup.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimEmployee.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimGeography.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimOrganization.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimProduct.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimProductCategory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimProductSubcategory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimPromotion.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimReseller.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimSalesReason.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimSalesTerritory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DimScenario.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactAdditionalInternationalProductDescription.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactCallCenter.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactCurrencyRate.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactFinance.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactInternetSale.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactProductInventory.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactResellerSale.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactSalesQuota.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactSurveyResponse.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProspectiveBuyer.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vAssocSeqLineItem.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vAssocSeqOrder.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vDMPrep.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vTargetMail.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vTimeSery.cs">
+      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AdventureWorksDW.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdventureWorksDW.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AdventureWorksDW.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+      <LastGenOutput>AdventureWorksDW.Context.cs</LastGenOutput>
+    </None>
+    <None Include="AdventureWorksDW.edmx.diagram">
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+    </None>
+    <None Include="AdventureWorksDW.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdventureWorksDW.edmx</DependentUpon>
+      <LastGenOutput>AdventureWorksDW.cs</LastGenOutput>
+    </None>
+    <None Include="App.Config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

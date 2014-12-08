@@ -214,16 +214,16 @@
       <DependentUpon>School.edmx</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+      <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+      <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="StudentGrade.cs">
       <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>AdventureWorksDW.tt</DependentUpon>
+      <DependentUpon>School.tt</DependentUpon>
     </Compile>
     <Compile Include="TransactionDB.Context.cs">
       <AutoGen>True</AutoGen>
