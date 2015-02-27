@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSQL2015", "TSQL2015\TSQL2015.csproj", "{66714791-6A40-4B46-8D47-1DE0B00AF55D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteClient", "RemoteClient\RemoteClient.csproj", "{97A4C959-0CD3-46A0-B39E-BB46468425FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotingServer", "RemoteServer\RemotingServer.csproj", "{8C9F9B86-3481-41EF-BC3D-E31162E10501}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66714791-6A40-4B46-8D47-1DE0B00AF55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66714791-6A40-4B46-8D47-1DE0B00AF55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66714791-6A40-4B46-8D47-1DE0B00AF55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66714791-6A40-4B46-8D47-1DE0B00AF55D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97A4C959-0CD3-46A0-B39E-BB46468425FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97A4C959-0CD3-46A0-B39E-BB46468425FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97A4C959-0CD3-46A0-B39E-BB46468425FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97A4C959-0CD3-46A0-B39E-BB46468425FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C9F9B86-3481-41EF-BC3D-E31162E10501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C9F9B86-3481-41EF-BC3D-E31162E10501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C9F9B86-3481-41EF-BC3D-E31162E10501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C9F9B86-3481-41EF-BC3D-E31162E10501}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
